@@ -1,0 +1,26 @@
+\usepackage{CJKutf8,CJKnumb}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage[paperwidth=185mm,paperheight=260mm,text={148mm,210mm},
+			left=21mm,vmarginratio=1:1]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage[pdftex]{graphicx}
+   \usepackage[pdftex,unicode=true]{hyperref}
+\else
+   \usepackage{graphicx}
+   \usepackage[unicode={true}]{hyperref}
+\fi
+\usepackage{tikz}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\endinput

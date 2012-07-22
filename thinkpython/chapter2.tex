@@ -1,0 +1,82 @@
+\chapter{变量，表达式和语句}
+\section{值与类型}
+值是编程过程最基本的事物，就象字母或者数字一样。迄今为止我们所看到的值是‘1’、‘2’和‘Hello,World!’
+
+这些值属于不同的类型：2是一个整数，‘Hello, World!’是字符串，之所以这样称呼是因为它由字符所构成的一个字串。你能够识别字符串是因为它被引号隔开了。
+
+输出语句也能工作于整数。
+\begin{lstlisting}
+>>> print 4
+4
+\end{lstlisting}
+如果你不能够确定一个值的类型是什么，解释器也能够告诉你。
+
+\begin{lstlisting}
+>>> type('Hello, World!')
+<type 'str'>
+>>> type(17)
+<type 'int'>
+\end{lstlisting}
+
+毋庸置疑，字符串属于str类型,整数属于int类型。带小数点的数属于float型则不那么明显，是因为这类数用浮点形式表示的缘故。
+
+\begin{lstlisting}
+>>>type(3.2)
+<type 'float'>
+\end{lstlisting}
+
+而像‘17’和‘3.2’是什么值类型呢？它们看起来像数字，而它们用单引号括起来的字符串。
+\begin{lstlisting}
+>>>type('17')
+<type 'str'>
+>>>type('3.2')
+<type 'str'>
+\end{lstlisting}
+实际上是字符串类型。
+
+当输入诸如1，000，000这样很大的整数时，你可能会尝试用逗号将其分为三位数为一组。在Python中，这不合法的整数，而这样做却是合法的：
+\begin{lstlisting}
+>>>print 1,000,000
+1 0 0
+\end{lstlisting}
+哦，那根本不是我们所期望的。Python将1，000，000解释为一个用逗号分隔的整数序列，并用空白分隔的方式打印之。
+这是我们所见到的第一个语义错误：代码运行过程中不产生任何错误信息，但它不却不做期望的事。
+\section{变量}
+编程语言最强大的特征之一就是具有操作变量的能力。变量是与之相关联的值的命名。
+
+赋值语句用于创建一个新的变量并给他们赋予一个值：
+\begin{lstlisting}
+>>>message='And now for something completely different'
+>>>n=17
+>>>pi=3.1415926535897931
+\end{lstlisting}
+这个例子创建了三个指派。第一个为新变量名message赋了一个字符串；第二个为n赋了17的值；第三个把$\pi$的（近似）值赋给了变量pi。
+
+在纸上表示变量的通用方式是写出变量名并用箭头指向变量的值。这样的图称称作状态图，主要由于它显示了每一个变量当前的状态。下面的图显示了前面例子的结果：
+
+要显示变量的值，可能使用print语句：
+\begin{lstlisting}
+>>print n
+17
+print pi
+3.14159265359
+\end{lstlisting}
+变量的类型是与它相关的值的类型。
+\begin{lstlisting}
+>>>type(message)
+<type 'str'>
+>>>type(n)
+<type 'int'>
+>>>type(pi)
+<type 'float'>
+\end{lstlisting}
+
+\begin{exercise}
+	如果你输入一个以零开头的整数，将获得令人迷惑的错误。
+\end{exercise}
+
+\begin{lstlisting}
+>>>zipcode=02492
+SyntaxError: invalid token
+\end{lstlisting}
+\endinput

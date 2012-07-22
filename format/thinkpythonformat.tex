@@ -1,0 +1,17 @@
+\renewcommand{\contentsname}{目\quad 录}
+\titlecontents{chapter}[1em]{\vspace{.5\baselineskip}\bfseries}
+{第\CJKnumber{\thecontentslabel}章\quad}{}
+{\hspace{.5em}\titlerule*[10pt]{$\cdot$}\contentspage}
+\renewcommand{\chaptername}{第\,\CJKnumber{\thechapter}\,章}
+\titleformat{\chapter}[hang]{\centering\LARGE\bfseries}{\chaptername}{1em}{}
+\titlespacing{\chapter}{0pt}{*0}{*4}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{第\,\thechapter\,章\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}{}}
+\fancyhead[ER]{\leftmark}
+\fancyhead[OL]{\rightmark}
+\fancyhead[EL,OR]{$\cdot$\ \thepage\ $\cdot$}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtheorem{exercise}{\hspace{2em}习题}[chapter]
+\endinput
