@@ -1,7 +1,24 @@
 \chapter{入门指南}
-
+作为本书的第一章，紧记我们有时会用严格的、简洁的形式引入概念。Haskell是一本深奥的语言，突然呈现的方方面面的主题绝大多数都能够证明这一点。为了建立牢固的Haskell基础，我们将对每一个主题进行详细的阐述。
 \section{Haskell环境}
-%\indent
+Haskell有很多实现方式，其中两种方式应用最为广泛。Hugs解释器主要用于教学。在实际应用中，Glasgow Haskell Complier（GHC)则更为流行。与Hugs相比，GHC更适合于“实际工作":它可以编译本机代码，支持并行执行，提供有用的性能分析和调试工具。基于上述理由，GHC这个Haskell实现将贯穿于本书始终。
 
+GHC有三个主要部件：
+
+\begin{description}
+\item[ghc]
+快速本机代码的优化编译器。
+\item[ghci]
+交互式解释器和调试器
+\item[runghc]
+以脚本的方式运行Haskell程序，而不需要先编译程序。
+\end{description}
+
+我们假设你所使用的GHC版本至少是6.8.2，它是2007年推出的稳定版本。本书的很多例子能够不经修改的运行于旧版本之上。然而，我们推荐你的平台上有可用的最新版本。如果你使用Windows或者Mac OS X，你可以轻松快速地使用安装程序。要获得这类平台的GHC拷贝，请访问GHC下载页面(http://www.haskell.org/ghc/download.html)，并查找相应的二进制代码包和安装程序。
+
+更多地关于GHC在不同平台上安装的信息，请参阅附录A。
+
+\section{解释器ghci指南}
+GHC的交互解释器是一个被称为ghci的程序。这个程序让我们可以输入并检验Haskell 表达式，检验究模块，调试代码。
 
 \endinput
