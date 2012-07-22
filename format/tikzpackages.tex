@@ -1,0 +1,105 @@
+\usepackage{CJKutf8,CJKnumb}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{makeidx}
+\makeindex
+\usepackage[paperwidth=185mm,paperheight=260mm,text={148mm,210mm},
+			left=21mm,vmarginratio=1:1]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage[pdftex]{graphicx}
+   \usepackage[pdftex,unicode=true]{hyperref}
+\else
+   \usepackage{graphicx}
+   \usepackage[unicode={true}]{hyperref}
+\fi
+\usepackage{tikz}
+
+% We need lots of libraries...
+\usetikzlibrary{
+  arrows,
+  calc,
+  fit,
+  patterns,
+  plotmarks,
+  shapes.geometric,
+  shapes.misc,
+  shapes.symbols,
+  shapes.arrows,
+  shapes.callouts,
+  shapes.multipart,
+  shapes.gates.logic.US,
+  shapes.gates.logic.IEC,
+  circuits.logic.US,
+  circuits.logic.IEC,
+  circuits.logic.CDH,
+  circuits.ee.IEC,
+  datavisualization,
+  datavisualization.formats.functions,
+  er,
+  automata,
+  backgrounds,
+  chains,
+  topaths,
+  trees,
+  petri,
+  mindmap,
+  matrix,
+  calendar,
+  folding,
+  fadings,
+  shadings,
+  spy,
+  through,
+  turtle,
+  positioning,
+  scopes,
+  decorations.fractals,
+  decorations.shapes,
+  decorations.text,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  decorations.footprints,
+  decorations.markings,
+  shadows,
+  lindenmayersystems,
+  intersections,
+  fixedpointarithmetic,
+  fpu,
+  svg.path,
+  external,
+}
+
+\iffalse
+%\iftrue
+	\tikzexternalize[
+		mode=list only,export=true,% simply skips EVERY picture -> good for debugging the text.
+	]
+		{pgfmanual}
+
+	\tikzifexternalizing{%
+		\pgfkeys{/pdflinks/codeexample links=false}%
+	}{}%
+\fi
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\tikzset{
+  every plot/.style={prefix=plots/pgf-},
+  shape example/.style={
+    color=black!30,
+    draw,
+    fill=yellow!30,
+    line width=.5cm,
+    inner xsep=2.5cm,
+    inner ysep=0.5cm}
+}
+\endinput

@@ -1,0 +1,17 @@
+\documentclass[a4paper,10pt,twoside]{book}
+\input {format/tikzpackages}
+\setlength{\parindent}{2em}
+\begin{document}
+\begin{CJK}{UTF8}{song}
+\input{format/tikzformat}
+\CJKtilde
+\sloppy\CJKspace
+\CJKindent
+% include first chapter content
+\include {tikz/chapter1}
+\include {tikz/chapter2}
+\newpage
+\printindex
+\newpage
+\end{CJK}
+\end{document}

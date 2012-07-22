@@ -1,0 +1,37 @@
+\chapter[绪论]{绪论}
+PGF软件包是一种采用“内嵌”方式创建图形的软件包。“PGF”的意义是指便携式的图形格式(portable graphics format)，它是由一组\TeX 绘图命令定义而成的。例如，代码\lstinline$\tikz\draw(0pt,0pt)--(20pt,4pt);$ 产生\tikz\draw(0pt,0pt)--(20pt,4pt);而代码 \lstinline$\tikz$\lstinline$\fill[orange](1ex,1ex)circle(1ex);$ 产生 \tikz\fill[orange](1ex,1ex)circle(1ex);。
+
+在一定程度上，你使用PGF编写图形同你用\TeX 编写文档一样。采用\TeX 排版方法绘图的最大优势是：快速创建简单图形，精研定位，可用宏集，经常使用的高级排版。当然，也有其缺点：学习难度大，非所见即所得，微小的改变要求小较长的再编译时间，代码不能真实的显示结果会是怎么样的。
+
+\section[系统结构]{系统结构}
+PGF系统由不同的层次组成：
+\begin{description}
+\item[系统层：]该层提供怎样进行驱动的完整的抽象。这里的驱动是一个类似于dvips或者dvipdfm这类采用.dvi文件作为输入并产生出.ps或.pdf文件的程序（不用担心，p\-dftex 程序也被当作一种驱动，虽然它不采用.dvi文件作为输入）。每个驱动都有相应的用于图像生成的语法，因而要想以便携的方式创建图像是件令人头痛的事。PGF的系统层抽象掉这些区别。例如，系统命令\lstinline$\pgfsys@lineto{10pt}{10pt}$ 用于将位于当前\lstinline${pgfpicture}$中的路径扩展到坐标为(10pt,10pt)的位置。无论是依赖dvips、 dvipdfm 或是pdftex来处理文档，系统命令将被转换为不同的\lstinline$\special$命令。由于把PGF转向一个新的驱动时每个附加命令做了许多的工作，所以系统是尽可能的简约。
+\item[基础层:]基础层提供了一系列的允许我们用拿来产生复杂图形的基本命令，并且它比通过直接调用系统层命令更容易。例如，系统不提供用于创建圆的命令，因为圆能够用多个基本的贝塞尔曲线构成。然而，作为用户的你想用一个简单的命令来创建圆，而不是写下长达半页纸的贝塞尔曲线支持坐标。因此，基础层提供了\lstinline$\pgfpathcircle$为你生成必须的曲线坐标。
+
+基础层是一个核心的组成部分，它由几个能够被一起加载的相互独立的包，以及诸如节点管理或者绘图接口这样用于扩展核心的众多明确目的的命令构成的附加模块。例如，BEAMER包仅仅用于核心，而不是形状模块。
+\item[前端层：]前端是使基础层更容易使用的一系列命令或者具体的语法。直接使用基础层的问题是采用该层书写的代码过于冗长。例如，画一个简单的三角形，需要使用多达5条的基础层命令：一个用于三角形第一个触点的开始路径，一个用于扩展该路径到第二角点，一个将其延展到第三点，一个用于封闭，以及一个用于实际给制该三角形。（与填充他形成对照）。在tikz中前面所有的命令都可以归结为一个类似METAFONT的简单命令：
+\begin{lstlisting}
+\draw(0,0)--(1,0)--(1,1)--cycle;
+\end{lstlisting}
+
+前端不的不同之外在于：
+\begin{itemize}
+\item TikZ前端是自然的PGF前端。这样的前端使得我们可能获得PGF的所有特性，而且更容易使用。其语法是METAFONT、PSTRICKS和自身思想的混合。该前端既不是METAFONT的兼容层，也不是PSTRICKS的兼容层，也打算变成二者。
+\item pgfpict2e前端重新实现了校准\LaTeX \lstinline${picture}$ 环境，并把象\lstinline$\line$ 或者\lstinline$\vector$ 这样的命令用于PGF的基础层。由于\lstinline$pict2e.sy$ 宏包至少能在重新实现的\lstinline${picture}$ 环境中动作得很好，所以这个层并不是真正必要的。然而，这个包背后的思想是将可实现的前端怎样简单的表示出来。
+
+实现一个将PSTRICKS命令映射到PGF的pgftricks前端是可能的。然而，即使完全可以实现我们不能这样做，很多同PSTRICKS配合的东西并不成功，换句话说，少量的PSTRICKS命令过于的依赖于PostScript的特性。虽然如此，这样的宏包在某些场合下也是有用的。
+\end{itemize}
+\end{description}
+作为PGF的用户，你也许会使用前端命令加上一些基础层的命令。基于此，本手册首先解释前端，其次是基础层，最后是系统层。
+\section{与其它图形宏包的比较}
+PGF并不是\TeX 中唯一的图形宏包。接下来，我们试图合理的公正的将PGF系统与其它宏包进行比较。
+\begin{enumerate}
+\item 校准的\LaTeX \lstinline${picture}$ 环境允许创建简单的图形，如此而以。这并不一定是由于\LaTeX 的设计者在这方面的知识或者创造力的不足所至。确切地说，这也是\lstinline${picture}$环境的可移植性所应当付出的代价：它需要同很的后端驱动一起运作。
+\item pstricks宏包是一个强大到足以创建任何能够想像到的各种图形，但他不能够全部移植。更重要地是，它既不能工作于pdftex，也不能够工作于其它不能产生PostScript代码的驱动环境。
+
+与PGF相比，pstricks拥有更广泛的支持基础。在过去十年里，其使用者已经贡献了很多用于特殊用途的附加宏包。
+
+TikZ 语法比 pstricks 的语法更加一致，因为TikZ采用了更集中的方式进行开发，以及克服了 pstricks 的不足。
+\end{enumerate}
+\endinput
