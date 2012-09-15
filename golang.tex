@@ -3,6 +3,23 @@
 \begin{document}
 \begin{CJK}{UTF8}{song}
 \input{format/thinkpythonformat}
+\lstdefinelanguage{golang}{
+morekeywords={var, int, float32,package,else,if,for,%
+import,func,complex128,complex,make,new,complex64},
+sensitive=true,
+morecomment=[l]{//},
+morecomment=[n]{},
+morestring=[b]",
+morestring=[b]',
+}
+\lstset{
+language=golang,
+numbers=left,
+numberstyle=\tiny,
+keywordstyle=\color{blue!70}, commentstyle=\color{red!50!green!50!blue!50},
+frame=shadowbox,
+rulesepcolor=\color{red!20!green!20!blue!20}
+}
 \CJKtilde
 \CJKindent
 % include first chapter content
