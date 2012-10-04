@@ -44,8 +44,9 @@ func main(){
 \end{lstlisting}
 
 \section{变量定义}
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 var i int
+var %Θ% float32
 var eplicitly,typed, pointers *complex128
 int_pointer :=&i 
 another_int_point :=new(int)
@@ -75,4 +76,26 @@ Go语言包括了三种特殊的类型，在本书的后续章节将揭示与sli
 Go语言中的引用类型实例使用内建函数make()创建。其功能与new()函数相似，也执行内建类型初始化。new()函数只时简单的返回一个零值，尽管良好的风格建设我们这样做，因此并不能保证其是直接可用的。
 
 \section{定义函数}
+\begin{lstlisting}
+func printf(str string, args ...interface{})(int, error){
+	_, err := fmt.Printf(str, args...)
+	return len(args), err
+}
+func main(){
+	count :=1
+	closure := func(msg string){
+		printf("%d %s\n", count, msg)
+		count++
+		}
+	closure ("A Message")
+	closure ("Another Message")
+}
+\end{lstlisting}
+
+Go语言使用关键字func进行函数声明。同变量声明一样，返回类型位于其后。其返回值可以是单值的，也可以是一个值列表。本节中的printf()函数展示了Go语言的几个重要的特性。能够返回多个值的多值函数：一个整数和一个错误。这个整数用以传递可变参数，错误用以返回fmt包中Printf()函数的错误信息。
+
+值得请注意的是函数调用时返回多个值。这些返回值要么被忽略，要么指定给相应的变量。下划线被用于希望忽略的返回值。
+
+
+
 \endinput

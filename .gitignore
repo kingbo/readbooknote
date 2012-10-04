@@ -25,5 +25,9 @@
 *.maf
 *.mtc
 *.mtc0
-*.pdf
 *.bak
+*.pdf
+!cad/pdf/*.pdf
+!cad/png/
+*.asy
+*.pre
